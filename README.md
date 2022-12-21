@@ -24,19 +24,23 @@ Bij de volgende stappen breid je de lokale bestanden iedere keer uit. Commit en 
 ## Taak: Draai de beschikbare stack
 In de bijgeleverde `docker-compose.yml` file wordt de volgende stack beschikbaar gemaakt:
 
-- Apache webserver met PHP module (HTTP op poort 80)
-- Varnish (HTTP op poort 80)
+- Apache webserver met PHP module (HTTP op poort 8080 gemapt naar poort 80)
+- Varnish (HTTP op poort 8081 gemapt naar poort 80)
 - MySQL database (poort 3306)
 - ElasticSearch database (poort 9200)
 - Redis in-memory database (poort 6379)
 
-Het doel van de opdracht is om vanuit PHP (dus ofwel vanaf de PHP CLI, ofwel vanaf de Apache webserver in combinatie met PHP) de overige services te controleren: Varnish, MySQL, ElasticSearch en Redis. Draai eerst `docker-compose up` om de stack op te starten. Controleer met `docker-compose ps` en `docker ps` of dit is gelukt.
+Het doel van de opdracht is om vanuit PHP (dus ofwel vanaf de PHP CLI, ofwel vanaf de Apache webserver in combinatie met PHP) de overige services te controleren: Varnish, MySQL, ElasticSearch en Redis. Draai eerst `docker-compose up -d` om de stack op te starten. Controleer met `docker-compose ps` en `docker ps` of dit is gelukt.
 
-- Controleer daarna per service of je er goed bij kan:
-    - Gebruik een MySQL client om een connectie met de database te maken.
-    - Gebruik de Redis CLI client om Redis statistieken te bekijken.
-    - Navigeer naar http://localhost:9200 voor output van ElasticSearch.
-    - Gebruik `docker inspect VARNISH` om het IP adres van de Varnish instance te achterhalen. Vervang hierbij `VARNISH` met de Docker container name of ID zoals die met `docker ps` wordt weergegeven. Navigeer naar het IP adres van Varnish poort 80 (bijvoorbeeld )
+Controleer daarna per service of je er goed bij kan:
+
+- Navigeer naar http://localhost/public/ voor het bezoeken van de webpagina.
+- Gebruik een MySQL client om een connectie met de database te maken.
+- Gebruik de Redis CLI client om Redis statistieken te bekijken (`redis-cli` om in te loggen en dan bijvoorbeeld het commando `INFO`).
+- Navigeer naar http://localhost:9200 voor output van ElasticSearch.
+- Navigeer naar http://localhost:8080/ voor output van Varnish. Je ziet als het goed is een Apache foutmelding. Maar in de HTTP headers van dit GET request zijn headers van Varnish terug te vinden.
+
+Let op dat de `docker-compose` stack gebruik maakt van poort mapping (bijvoorbeeld `80:80`) om de lokale poort naar de poort van de desbetreffende Docker container. In plaats van gebruik te maken van de poort mapping in Docker, kunnen we ook rechtstreeks naar de container toe navigeren. Gebruik `docker inspect DOCKERNAME` om de IP adres van de containers te achterhalen. Vervang hierbij `DOCKERNAME` met de Docker container name of ID zoals die met `docker ps` wordt weergegeven. Navigeer naar het IP adres en het poort nummer om een rechtstreekse verbinding te maken.
 
 ## Taak: Voeg een MySQL check toe
 Volg de [Symfony documentatie](https://symfony.com/doc/current/console.html#creating-a-command) voor het toevoegen van een nieuw commando `bin/console stack-check:mysql` met een PHP klasse `App\Command\Check\MySQL`. Zorg eerst dat het CLI commando werkt met een simpele `Hello World`. Breid het daarna uit om met `mysqli_connect()` een connectie te maken met de database:
@@ -75,8 +79,7 @@ Voeg een nieuw commando voor ElasticSearch toe. Installeer [Guzzle](https://pack
 Voeg een nieuw commando voor Redis toe. Installeer [predis/predis](https://packagist.org/packages/predis/predis) voor het maken van een connectie.
 
 ## Taak: Voeg een Varnish check toe
-Controleer of Varnish benaderbaar is.
+Controleer of Varnish benaderbaar is. Gebruik hiervoor ook weer Guzzle maar controleer hierbij de HTTP headers van de response.
 
 ## Taak: Frontend voor controles
-Schijf hiernaast een frontend in [Bootstrap CSS](https://getbootstrap.com/) en [jQuery](https://jquery.com/), waarbij door middel van AJAX calls de API van dezelfde applicatie wordt aangeroepen om dezelfde gegevens te tonen. Schrijf hierbij controllers volgens de [Symfony documentatie](https://symfony.com/doc/current/controller.html) en return een JSON antwoord dat dan via jQuery opgepakt kan worden.
-
+Schijf een frontend in [Bootstrap CSS](https://getbootstrap.com/) en [jQuery](https://jquery.com/), waarbij door middel van AJAX calls de API van dezelfde applicatie wordt aangeroepen om dezelfde gegevens te tonen. Schrijf hierbij controllers volgens de [Symfony documentatie](https://symfony.com/doc/current/controller.html) en return een JSON antwoord dat dan via jQuery opgepakt kan worden.

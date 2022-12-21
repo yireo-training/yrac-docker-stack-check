@@ -2,31 +2,30 @@
 
 namespace App\Command\Check;
 
-use App\Check\MySQL as MySQLCheck;
-use App\Kernel;
+use App\Check\Redis as RedisCheck;
+use Predis\Client;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\Container;
 
-#[AsCommand(name: 'stack-check:mysql', description: 'Check if MySQL is functioning')]
-class MySQL extends Command
+#[AsCommand(name: 'stack-check:redis', description: 'Check if Redis is functioning')]
+class Redis extends Command
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $mysqlCheck = new MySQLCheck();
-        if (false === $mysqlCheck->ping()) {
-            $output->writeln('<error>Could not connect to MySQL</error>');
+        $redisCheck = new RedisCheck();
+        if (false === $redisCheck->ping()) {
+            $output->writeln('<error>Could not connect to Redis</error>');
             return Command::FAILURE;
         }
 
         $table = new Table($output);
         $table->setHeaders(['Check', 'Outcome']);
-        $table->addRow(['Basic MySQL database connection', 'Yes']);
-        $table->addRow(['MySQL client version', $mysqlCheck->getClientVersion()]);
-        $table->addRow(['MySQL server version', $mysqlCheck->version()]);
+        $table->addRow(['Redis database connection', 'Yes']);
+        $table->addRow(['Redis server version', $redisCheck->version()]);
+
 
         $table->render();
 
