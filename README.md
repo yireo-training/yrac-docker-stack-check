@@ -12,7 +12,7 @@ Start met een eigen lege folder, dus niet een clone van deze GitHub repository. 
 composer create-project symfony/skeleton docker-stack-check
 ```
 
-Controleer of `bin/console` uit te voeren is vanaf de command-line. Copieer de file `docker-compose.yml` van deze GitHub repository naar je eigen folder.
+Controleer of `bin/console` uit te voeren is vanaf de command-line. Copieer de files `docker-compose.yml`, `Dockerfile` en `varnish.vcl` van deze GitHub repository naar je eigen folder.
 
 ## Taak: Upload alle bestanden naar GitHub
 Initialiseer een nieuwe git repository in de nieuw aangemaakte Symfony folder `docker-stack-check/` door middel van `git init`. Voeg alle bestanden toe aan de repository en doe een commit.
@@ -22,7 +22,7 @@ Maak een nieuwe private GitHub repository. Configureer je SSH keys zodat je kan 
 Bij de volgende stappen breid je de lokale bestanden iedere keer uit. Commit en push alle veranderingen iedere keer naar GitHub.
 
 ## Taak: Draai de beschikbare stack
-In de bijgeleverde `docker-compose.yml` file wordt de volgende stack beschikbaar gemaakt:
+In de `docker-compose.yml` file van deze repository wordt de volgende stack beschikbaar gemaakt:
 
 - Apache webserver met PHP module (HTTP op poort 8080 gemapt naar poort 80)
 - Varnish (HTTP op poort 8081 gemapt naar poort 80)
