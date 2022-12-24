@@ -6,7 +6,11 @@ Bij het gebruik van een container stack (bijvoorbeeld een `docker-compose` stack
 Het doel van deze opdracht is om een kleine PHP applicatie te schrijven, die rapporteert of een bepaalde `docker-compose` stack met daarin PHP-FPM, Nginx, ElasticSearch, MySQL en Redis operationeel is.
 
 ## Taak: Maak een dummy PHP applicatie aan
-Start met een eigen lege folder, dus niet een clone van deze GitHub repository. Zorg ervoor dat je PHP 8.1 hebt geinstalleerd (`php -v`). Gebruik Symfony om een nieuwe applicatie aan te maken:
+Start met een eigen lege folder, dus niet een clone van deze GitHub repository. 
+
+Zorg ervoor dat je PHP 8.1 of PHP 8.2 hebt geinstalleerd (`php -v`). Draai je onder MacOS, gebruik hier dan `brew` voor.
+
+Gebruik Symfony om een nieuwe applicatie aan te maken:
 
 ```bash
 composer create-project symfony/skeleton docker-stack-check
@@ -22,6 +26,8 @@ Maak een nieuwe private GitHub repository. Configureer je SSH keys zodat je kan 
 Bij de volgende stappen breid je de lokale bestanden iedere keer uit. Commit en push alle veranderingen iedere keer naar GitHub.
 
 ## Taak: Draai de beschikbare stack
+Installeer Docker als je dat nog niet geinstalleerd hebt. Draai je MacOS, installeer dan Docker niet (!) via `brew` (vanwege compatibileitsproblemen met VirtualBox en `docker-machine`) maar installeer Docker Desktop via de officiele handleiding van Docker zelf.
+
 In de `docker-compose.yml` file van deze repository wordt de volgende stack beschikbaar gemaakt:
 
 - Apache webserver met PHP module (HTTP op poort 8080 gemapt naar poort 80)
