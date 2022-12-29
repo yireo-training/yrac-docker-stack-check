@@ -5,6 +5,8 @@ Bij het gebruik van een container stack (bijvoorbeeld een `docker-compose` stack
 
 Het doel van deze opdracht is om een kleine PHP applicatie te schrijven, die rapporteert of een bepaalde `docker-compose` stack met daarin PHP-FPM, Nginx, ElasticSearch, MySQL en Redis operationeel is.
 
+# Backend Developer taken
+
 ## Taak: Maak een dummy PHP applicatie aan
 Start met een eigen lege folder, dus niet een clone van deze GitHub repository. 
 
@@ -87,5 +89,22 @@ Voeg een nieuw commando voor Redis toe. Installeer [predis/predis](https://packa
 ## Taak: Voeg een Varnish check toe
 Controleer of Varnish benaderbaar is. Gebruik hiervoor ook weer Guzzle maar controleer hierbij de HTTP headers van de response.
 
+# Frontend Developer taken
+
+## Taak: Draai deze repository applicatie
+Gebruik de **Use this template** knop in deze GitHub repository om op basis van deze repository een eigen repository op te zetten. Configureer je SSH keys zodat je kan pushen en pullen naar deze repository. Nodig jissereitsma uit als collaborator voor deze nieuwe repository. Clone de nieuwe eigen repository naar jouw eigen development omgeving. Stel de docent op de hoogte van de nieuwe repository (mocht de uitnodiging tot collaboration verloren gaan).
+
+Installeer Docker als je dat nog niet geinstalleerd hebt. Draai je MacOS, installeer dan Docker niet (!) via brew (vanwege compatibileitsproblemen met VirtualBox en `docker-machine`) maar installeer Docker Desktop via de officiele handleiding van Docker zelf.
+
+Installeer `composer` als je dat nog niet geinstalleerd hebt. Draai hierna - binnen jouw eigen lokale repository - `composer install` om alle dependencies te installeren.
+
+Draai hierna `docker-compose up -d` om de stack op te starten. Controleer met `docker-compose ps` en `docker ps` of dit is gelukt.
+
+Navigeer hierna naar http://localhost om de huidige frontend te bezoeken.
+
 ## Taak: Frontend voor controles
+Gooi de huidige `templates/main.html.twig` file weg en maak een leeg bestand aan.
+
 Schijf een frontend in [Bootstrap CSS](https://getbootstrap.com/) en [jQuery](https://jquery.com/), waarbij door middel van AJAX calls de API van dezelfde applicatie wordt aangeroepen om dezelfde gegevens te tonen. Schrijf hierbij controllers volgens de [Symfony documentatie](https://symfony.com/doc/current/controller.html) en return een JSON antwoord dat dan via jQuery opgepakt kan worden.
+
+Gebruik eventueel iconen van de FontAwesome library om dingen mooi te maken.
