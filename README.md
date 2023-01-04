@@ -89,6 +89,9 @@ Voeg een nieuw commando voor Redis toe. Installeer [predis/predis](https://packa
 ## Taak: Voeg een Varnish check toe
 Controleer of Varnish benaderbaar is. Gebruik hiervoor ook weer Guzzle maar controleer hierbij de HTTP headers van de response.
 
+## Taak: Refactor de controllers
+Maak een nieuwe overkoepelende controller aan die voor alle checks output genereert (in plaats van een controller per check).
+
 # Frontend Developer taken
 
 ## Taak: Draai deze repository applicatie
